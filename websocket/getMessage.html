@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get</title>
+    <style>
+        .title{
+            text-align: center;
+        }
+        #mess{
+            text-align: center;
+            width:600px;
+            height:400px;
+            word-wrap: break-word;
+            overflow: auto;
+            background: #dddddd;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<h4 class="title">接收信息</h4>
+<div id="mess"></div>
+<script>
+    var mess = document.getElementById("mess");
+    var ws2 = new WebSocket('ws://localhost:8888');
+    ws2.onopen = function(e){
+        console.log("接收消息连接服务器成功");
+        ws2.send("getMessage");
+    };
+    ws2.onclose = function(e){
+        console.log("服务器关闭");
+    };
+    ws2.onerror = function(){
+        console.log("连接出错");
+    };
+    ws2.onmessage = function(e){
+        mess.innerHTML += e.data + "<br>"
+    }
+</script>
+</body>
+</html>

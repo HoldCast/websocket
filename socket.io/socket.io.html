@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>即时通讯-socket.io</title>
+    <style>
+        .main {
+            width: 600px;
+            margin: auto;
+            box-shadow: 3px 3px 5px #9f9f9f;
+        }
+
+        .title{
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            background: #ddddff;
+        }
+
+        .chart-message {
+            box-sizing: border-box;
+            padding:5px;
+            width: 100%;
+            height: 300px;
+            background: #eaeaea;
+            overflow: auto;
+            word-wrap: break-word; /*自动换行*/
+        }
+
+        .send-message {
+            width: 100%;
+            height: 140px;
+            background: #ccc;
+
+        }
+
+        .send-message textarea {
+            width: 575px;
+            height: 100px;
+            resize: none;
+            outline: none;
+            margin:3px 0 0 9px;
+        }
+        .send-btn-div {
+            text-align: right;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <div class="title">用户ID: <span id="userId"></span></div>
+    <div class="chart-message" id="chartMessage"></div>
+    <div class="send-message">
+        <textarea id="message"></textarea>
+        <div class="send-btn-div">
+            <input type="button" id="send" value="发送">
+        </div>
+    </div>
+</div>
+<!--socket.io.js通过nodeJS安装socket.io依赖生成-->
+<script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+<script>
+    socket = io.connect('ws://127.0.0.1:3000');
+    //发送
+    socket.emit("msg", {type: 'init'});
+    socket.on("msg", function (data) {
+        //console.log(data);
+        var userId = document.getElementById('userId');
+        if (data.type == 'init' && !userId.innerHTML) {
+            userId.innerHTML = data.id;
+        }
+        else {
+            document.getElementById('chartMessage').innerHTML += data.id + ':' + data.msg + '<br>';
+        }
+    });
+    //绑定发送事件
+    document.getElementById('send').onclick = function () {
+        var message = document.getElementById('message').value;
+        if (message) {
+            socket.emit("msg", {type: 'msg', msg: message});
+            document.getElementById('message').value = '';
+        }
+    }
+
+</script>
+</body>
+</html>
