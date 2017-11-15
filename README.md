@@ -1,4 +1,4 @@
-#使用websocket协议 + nodeJS实现即时通讯
+### 使用websocket协议 + nodeJS实现即时通讯
 
 1.websocket + nodejS
     1)到websocket目录下安装依赖:npm install --save-dev nodejs-websocket
@@ -11,3 +11,5 @@
     2)运行 node socketIoServer.js
     3)页面打开socket.io.html  (在多个终端下打开,测试同步性)
     4)socket.io.html注意引用socket.io模块中的socket.io.js
+
+#### [websocket协议原理说明](https://www.zhihu.com/question/20215561)
