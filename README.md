@@ -1,9 +1,9 @@
 ### 使用websocket协议 + nodeJS实现即时通讯
 
 1.websocket + nodejS  
-    1)到websocket目录下安装依赖:npm install --save-dev nodejs-websocket
-    2)运行 node websocketServer.js
-    3)同时打开sendMessage.hrml 和 getMessage.html, 分别发送消息和接收消息
+    -1)到websocket目录下安装依赖:npm install --save-dev nodejs-websocket
+    -2)运行 node websocketServer.js
+    -3)同时打开sendMessage.hrml 和 getMessage.html, 分别发送消息和接收消息
 
 
 2.socket.io + nodeJS
